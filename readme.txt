@@ -1,38 +1,36 @@
-1. Реализовано подмножество вычислений арифметических выражений языка С.
+1. Implemented a subset of calculations of arithmetic expressions in C language.
 
-Реализовано:
+Implemented:
 
-Операции арифметические: + - * / f так же унарные - и + (выражения типа -1,+10)
-Операции Сравнения  > <,==,!=,>=,<=
-Тринарный оператор сравнения ? : (A?B:C) (если A то В, в противном случае С)
-Вызов функций из пакета Math
-Использование переменных из пакета Math
+Arithmetic operations: + - * / f also unary - and + (expressions like -1,+10)
+Comparison Operations > <,==,!=,>=,<=
+Trinary comparison operator ? : (A?B:C) (if A then B, otherwise C)
+Calling functions from the Math package
+Using Variables from the Math Package
 
-Тип грамматики SLR(0)
+Grammar type SLR(0)
 
-
-Интерфейс парсера, как и раньше содержится в классе 
+The parser interface, as before, is contained in the class
 su.org.ms.parsers.mathcalc.Parser
 
-Тесты парсера находятся в пакете su.org.ms.parsers.mathcalc.tst
-Вызов всех тестов TFullCalculate этого пакета.
+The parser tests are in the package su.org.ms.parsers.mathcalc.tst
+Calling all TFullCalculate tests in this package.
 
-	Сами тестовые формулы можно править в IGetFormulaByNameTest.java, 
-если будете добавлять/удалять формулы не забываейте править 
-переменную sz строка 103 этого файла.
+The test formulas themselves can be edited in IGetFormulaByNameTest.java,
+if you add / remove formulas, do not forget to edit variable sz line 103 of this file.
 
-2. Особенности использования Кеша деревьев разбора.
+2. Peculiarities of using Cache of parse trees.
 
-	Кеш деревьев разбора предназначен для исключения этапа трансляции 
-при вычислении идентичных формул. Идентичными называются формулы, имеющие 
-одинаковую вычислительную структуру. 
-	Например: (a+b)/c-1.3 и формулы (1.1-s)*3.1+x идентичны и имеет одно 
-и тоже дерево разбора с точностью до перестановки лексем. 
-	Однако формулы  (a+b)/c-1.3 (a+-b)/c-1.3 имеют разные деревья разбора 
-	и для каждой из них буду созданы записи в Кеше.
+The parse tree cache is designed to eliminate the translation step
+when calculating identical formulas. 
+Formulas are said to be identical if they have the same computational structure.
+For example: (a+b)/c-1.3 and formulas (1.1-s)*3.1+x are identical and have one
+and also a parse tree up to a permutation of tokens.
+However, formulas (a+b)/c-1.3 (a+-b)/c-1.3 have different parse trees
+and for each of them entries in the cache will be created.
 
-	Т.о. использование Кеша эффективно не только при вычислении 
-	одних и тех же формул с изменяемыми параметрами, но и формул, 
-	в которых операции заменены на другие с тем же приоритетом.
+The use of the cache is effective not only in computing
+the same formulas with variable parameters, but also formulas
+in which operations are replaced by others with the same priority.
 
-Общий сброс Кеша осуществляется функцией  clearCash() парсера.
+The general reset of the cache is carried out by the parser's clearCash() function.
